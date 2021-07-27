@@ -1,0 +1,16 @@
+#!/usr/bin/env bash
+
+main() {
+    if [ -v GCLOUD_CREDENTIALS ] && [ -v GCLOUD_INSTANCE ]
+    then
+        echo "Starting CloudSQL Proxy"
+        bin/run_cloud_sql_proxy
+    else
+        echo "Environment variables not present for CloudSQL Proxy to run"
+    fi
+    exec "$@"
+}
+
+# Following the pattern of pgbounder buildpack
+# https://github.com/heroku/heroku-buildpack-pgbouncer/blob/75d70dd7daf3777849a711b520b57d00ea85c647/bin/start-pgbouncer#L156
+[[ "$0" != "$BASH_SOURCE" ]] || main "$@"
