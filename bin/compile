@@ -4,6 +4,7 @@ set -e
 
 BUILD_DIR=$1
 CACHE_DIR=$2
+BUILDPACK_DIR="$(dirname $(dirname $0))"
 
 if [ ! -f $CACHE_DIR/cloud_sql_proxy ]; then
 	echo "-----> Downloading cloud_sql_proxy"
@@ -32,5 +33,6 @@ EOF
 chmod +x $BUILD_DIR/bin/run_cloud_sql_proxy
 
 echo "-----> Adding ENV guard for running cloud_sql_proxy into slug"
+cp "$BUILDPACK_DIR/bin/start-cloudsql-proxy" $BUILD_DIR/bin/
 chmod +x $BUILD_DIR/bin/start-cloudsql-proxy
 exit 0
