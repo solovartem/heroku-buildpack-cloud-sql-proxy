@@ -4,8 +4,7 @@ main() {
     if [ -v GCLOUD_CREDENTIALS ] && [ -v GCLOUD_INSTANCE ] && [ -v GCLOUD_NOTIFICATION_INSTANCE ]
     then
         echo "Starting CloudSQL Proxy"
-        bin/run_cloud_sql_proxy
-        bin/run_cloud_sql_notification_proxy
+        bin/run_cloud_sql_proxy && bin/run_cloud_sql_notification_proxy
     else
         echo "Environment variables not present for CloudSQL Proxy to run"
     fi
